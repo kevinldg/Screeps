@@ -1,0 +1,14 @@
+# IntelliJ IDEA
+.idea
+
+# Compiled Files
+dist
+*.js
+*.js.map
+
+# Node Modules
+node_modules
+
+# Environment Variables
+.env
+
