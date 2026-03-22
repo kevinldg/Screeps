@@ -22,35 +22,25 @@ export function loop() {
     }
 
     // Spawn creeps
-    const harvesters = _.filter(Game.creeps, (c) => c.memory.role == 'harvester');
-    const carriers = _.filter(Game.creeps, (c) => c.memory.role == 'carrier');
-    const upgraders = _.filter(Game.creeps, (c) => c.memory.role == 'upgrader');
-    const builders = _.filter(Game.creeps, (c) => c.memory.role == 'builder');
-    const repairers = _.filter(Game.creeps, (c) => c.memory.role == 'repairer');
-    const roadworkers = _.filter(Game.creeps, (c) => c.memory.role == 'roadworker');
-    const containercarer = _.filter(Game.creeps, (c) => c.memory.role == 'containercarer');
+    const CREEP_CONFIG = [
+        { role: 'harvester', limit: 2, body: [WORK, WORK, CARRY, MOVE] },
+        { role: 'carrier', limit: 2, body: [CARRY, CARRY, MOVE, MOVE] },
+        { role: 'upgrader', limit: 1, body: [WORK, CARRY, CARRY, MOVE] },
+        { role: 'repairer', limit: 0, body: [WORK, WORK, CARRY, MOVE] },
+        { role: 'builder', limit: 2, body: [WORK, WORK, CARRY, MOVE] },
+        { role: 'roadworker', limit: 1, body: [WORK, WORK, CARRY, MOVE] },
+        { role: 'containercarer', limit: 1, body: [WORK, WORK, CARRY, MOVE] }
+    ];
 
-    if (harvesters.length < 2) {
-        const name = 'Harvester' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'harvester' } });
-    } else if (carriers.length < 2) {
-        const name = 'Carrier' + Game.time;
-        Game.spawns[spawnName].spawnCreep([CARRY, CARRY, MOVE, MOVE], name, { memory: { role: 'carrier' } });
-    } else if (upgraders.length < 1) {
-        const name = 'Upgrader' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, CARRY, CARRY, MOVE], name, { memory: { role: 'upgrader' } });
-    } else if (repairers.length < 0) {
-        const name = 'Repairer' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'repairer' } });
-    } else if (builders.length < 1) {
-        const name = 'Builder' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'builder' } });
-    } else if (roadworkers.length < 1) {
-        const name = 'Roadworker' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'roadworker' } });
-    } else if (containercarer.length < 1) {
-        const name = 'Containercarer' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'containercarer' } });
+    for (const config of CREEP_CONFIG) {
+        const creeps = _.filter(Game.creeps, (c) => c.memory.role === config.role);
+
+        if (creeps.length < config.limit) {
+            const name = config.role.charAt(0).toUpperCase() + config.role.slice(1) + Game.time;
+            Game.spawns[spawnName].spawnCreep(config.body, name,
+                { memory: { role: config.role } });
+            break;
+        }
     }
 
     // Execute roles
