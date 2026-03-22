@@ -32,13 +32,13 @@ export function loop() {
     } else if (carriers.length < 2) {
         const name = 'Carrier' + Game.time;
         Game.spawns[spawnName].spawnCreep([CARRY, CARRY, MOVE, MOVE], name, { memory: { role: 'carrier' } });
-    } else if (upgraders.length < 1) {
+    } else if (upgraders.length < 2) {
         const name = 'Upgrader' + Game.time;
         Game.spawns[spawnName].spawnCreep([WORK, CARRY, CARRY, MOVE], name, { memory: { role: 'upgrader' } });
     } else if (repairers.length < 1) {
         const name = 'Repairer' + Game.time;
         Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'repairer' } });
-    } else if (builders.length < 2) {
+    } else if (builders.length < 0) {
         const name = 'Builder' + Game.time;
         Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'builder' } });
     }
