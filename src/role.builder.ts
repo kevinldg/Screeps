@@ -3,11 +3,9 @@ export const roleBuilder = {
 
         if (creep.memory.building && creep.store[RESOURCE_ENERGY] === 0) {
             creep.memory.building = false;
-            creep.say('🔄 Collect');
         }
         if (!creep.memory.building && creep.store.getFreeCapacity() === 0) {
             creep.memory.building = true;
-            creep.say('🏗️ Build');
         }
 
         if (creep.memory.building) {
@@ -17,6 +15,7 @@ export const roleBuilder = {
                     creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
                 }
             }
+            creep.say('🏗️ Build');
             return;
         }
 
@@ -31,6 +30,7 @@ export const roleBuilder = {
             if (creep.withdraw(targets[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
             }
+            creep.say('🔄 Collect');
             return;
         }
 

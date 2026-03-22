@@ -4,7 +4,6 @@ export const roleCarrier = {
         if (creep.store.getUsedCapacity() === 0) {
             creep.memory.collecting = true;
         }
-
         if (creep.store.getFreeCapacity() === 0) {
             creep.memory.collecting = false;
         }
@@ -12,11 +11,28 @@ export const roleCarrier = {
         if (creep.memory.collecting) {
             creep.say("📦");
 
-            const drops = creep.room.find(FIND_DROPPED_RESOURCES);
+            const droppedEnergy = creep.pos.findClosestByPath(FIND_DROPPED_RESOURCES, {
+                filter: (r) => r.resourceType === RESOURCE_ENERGY
+            });
 
-            if (drops.length > 0) {
-                if (creep.pickup(drops[0]) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(drops[0], { visualizePathStyle: { stroke: "#ffaa00" } });
+            if (droppedEnergy) {
+                if (creep.pickup(droppedEnergy) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(droppedEnergy, { visualizePathStyle: { stroke: "#ffaa00" } });
+                }
+                return;
+            }
+
+            const containers = creep.room.find(FIND_STRUCTURES, {
+                filter: (s: AnyStructure) =>
+                    s.structureType === STRUCTURE_CONTAINER &&
+                    s.store.getUsedCapacity(RESOURCE_ENERGY) > 0
+            }) as StructureContainer[];
+
+            const container = creep.pos.findClosestByPath(containers);
+
+            if (container) {
+                if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                    creep.moveTo(container, { visualizePathStyle: { stroke: "#ffaa00" } });
                 }
             }
 

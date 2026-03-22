@@ -3,17 +3,16 @@ export const roleUpgrader = {
 
         if (creep.memory.upgrading && creep.store[RESOURCE_ENERGY] === 0) {
             creep.memory.upgrading = false;
-            creep.say('🔄 Collect');
         }
         if (!creep.memory.upgrading && creep.store.getFreeCapacity() === 0) {
             creep.memory.upgrading = true;
-            creep.say('⚡ Upgrade');
         }
 
         if (creep.memory.upgrading) {
             if (creep.upgradeController(creep.room.controller) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller, { visualizePathStyle: { stroke: '#ffffff' } });
             }
+            creep.say('⚡ Upgrade');
             return;
         }
 
@@ -28,6 +27,7 @@ export const roleUpgrader = {
             if (creep.withdraw(targets[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
             }
+            creep.say('🔄 Collect');
             return;
         }
 

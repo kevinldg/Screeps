@@ -24,18 +24,18 @@ export function loop() {
     const upgraders = _.filter(Game.creeps, (c) => c.memory.role == 'upgrader');
     const builders = _.filter(Game.creeps, (c) => c.memory.role == 'builder');
 
-    if (harvesters.length < 1) {
+    if (harvesters.length < 2) {
         const name = 'Harvester' + Game.time;
         Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'harvester' } });
-    } else if (carriers.length < 1) {
+    } else if (carriers.length < 2) {
         const name = 'Carrier' + Game.time;
-        Game.spawns[spawnName].spawnCreep([CARRY, CARRY, MOVE], name, { memory: { role: 'carrier' } });
-    } else if (upgraders.length < 1) {
+        Game.spawns[spawnName].spawnCreep([CARRY, CARRY, CARRY, MOVE], name, { memory: { role: 'carrier' } });
+    } else if (upgraders.length < 2) {
         const name = 'Upgrader' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], name, { memory: { role: 'upgrader' } });
-    } else if (builders.length < 2) {
+        Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE], name, { memory: { role: 'upgrader' } });
+    } else if (builders.length < 0) {
         const name = 'Builder' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], name, { memory: { role: 'builder' } });
+        Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE], name, { memory: { role: 'builder' } });
     }
 
     // Execute roles
