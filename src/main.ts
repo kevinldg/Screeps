@@ -6,7 +6,7 @@ import {roleBuilder} from "./role.builder";
 import {roleCarrier} from "./role.carrier";
 import {roleRepairer} from "./role.repairer";
 import {roleRoadworker} from "./role.roadworker";
-import {roleContainercarer} from "./role.containerCarer";
+import {roleContainerCarer} from "./role.containerCarer";
 
 export function loop() {
 
@@ -61,7 +61,7 @@ export function loop() {
         carrier: roleCarrier,
         repairer: roleRepairer,
         roadworker: roleRoadworker,
-        containercarer: roleContainercarer
+        containercarer: roleContainerCarer
     };
 
     for(const name in Game.creeps) {
