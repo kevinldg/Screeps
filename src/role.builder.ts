@@ -12,7 +12,7 @@ export const roleBuilder = {
             const targets = creep.room.find(FIND_CONSTRUCTION_SITES);
             if (targets.length > 0) {
                 if (creep.build(targets[0]) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
+                    creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#FF8C00' } });
                 }
             }
             creep.say('🏗️');
@@ -28,7 +28,7 @@ export const roleBuilder = {
 
         if (targets.length > 0) {
             if (creep.withdraw(targets[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+                creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#FF8C00' } });
             }
             creep.say('🔄');
             return;
@@ -37,7 +37,7 @@ export const roleBuilder = {
         const drops = creep.room.find(FIND_DROPPED_RESOURCES);
         if (drops.length > 0) {
             if (creep.pickup(drops[0]) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(drops[0], { visualizePathStyle: { stroke: '#ffaa00' } });
+                creep.moveTo(drops[0], { visualizePathStyle: { stroke: '#FF8C00' } });
             }
         }
     }

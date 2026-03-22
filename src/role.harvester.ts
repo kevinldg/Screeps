@@ -10,12 +10,12 @@ export const roleHarvester = {
 
         if (creep.store.getFreeCapacity() > 0) {
             if (creep.harvest(source) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(source, { visualizePathStyle: { stroke: "#ffaa00" } });
+                creep.moveTo(source, { visualizePathStyle: { stroke: "#FFD700" } });
             }
         } else {
             if (container) {
                 if (creep.transfer(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(container, { visualizePathStyle: { stroke: "#ffffff" } });
+                    creep.moveTo(container, { visualizePathStyle: { stroke: "#FFD700" } });
                 }
             }
         }

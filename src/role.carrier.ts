@@ -17,7 +17,7 @@ export const roleCarrier = {
 
             if (droppedEnergy) {
                 if (creep.pickup(droppedEnergy) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(droppedEnergy, { visualizePathStyle: { stroke: "#ffaa00" } });
+                    creep.moveTo(droppedEnergy, { visualizePathStyle: { stroke: "#1E90FF" } });
                 }
                 return;
             }
@@ -32,7 +32,7 @@ export const roleCarrier = {
 
             if (container) {
                 if (creep.withdraw(container, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    creep.moveTo(container, { visualizePathStyle: { stroke: "#ffaa00" } });
+                    creep.moveTo(container, { visualizePathStyle: { stroke: "#1E90FF" } });
                 }
             }
 
@@ -50,7 +50,7 @@ export const roleCarrier = {
 
         if (targets.length > 0) {
             if (creep.transfer(targets[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                creep.moveTo(targets[0], { visualizePathStyle: { stroke: "#ffffff" } });
+                creep.moveTo(targets[0], { visualizePathStyle: { stroke: "#1E90FF" } });
             }
         }
     }
