@@ -15,7 +15,7 @@ export const roleBuilder = {
                     creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffffff' } });
                 }
             }
-            creep.say('🏗️ Build');
+            creep.say('🏗️');
             return;
         }
 
@@ -30,7 +30,7 @@ export const roleBuilder = {
             if (creep.withdraw(targets[0], RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 creep.moveTo(targets[0], { visualizePathStyle: { stroke: '#ffaa00' } });
             }
-            creep.say('🔄 Collect');
+            creep.say('🔄');
             return;
         }
 
