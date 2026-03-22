@@ -1,6 +1,9 @@
+// @ts-nocheck
+
 import {roleHarvester} from "./role.harvester";
 import {roleUpgrader} from "./role.upgrader";
 import {roleBuilder} from "./role.builder";
+import {roleCarrier} from "./role.carrier";
 
 export function loop() {
 
@@ -12,41 +15,37 @@ export function loop() {
         }
     }
 
-    // Always two: harvester, upgrader, builder
-
-    // @ts-ignore
+    // Spawn creeps
     const harvesters = _.filter(Game.creeps, (c) => c.memory.role == 'harvester');
+    const carriers = _.filter(Game.creeps, (c) => c.memory.role == 'carrier');
+    const upgraders = _.filter(Game.creeps, (c) => c.memory.role == 'upgrader');
+    const builders = _.filter(Game.creeps, (c) => c.memory.role == 'builder');
+
     if (harvesters.length < 2) {
         const name = 'Harvester' + Game.time;
-        Game.spawns['Spawn'].spawnCreep([WORK, CARRY, MOVE], name, { memory: { role: 'harvester' } });
-    }
-
-    // @ts-ignore
-    const upgraders = _.filter(Game.creeps, (c) => c.memory.role == 'upgrader');
-    if (upgraders.length < 2) {
+        Game.spawns['Spawn'].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'harvester' } });
+    } else if (carriers.length < 2) {
+        const name = 'Carrier' + Game.time;
+        Game.spawns['Spawn'].spawnCreep([CARRY, CARRY, MOVE], name, { memory: { role: 'carrier' } });
+    } else if (upgraders.length < 1) {
         const name = 'Upgrader' + Game.time;
         Game.spawns['Spawn'].spawnCreep([WORK, CARRY, MOVE], name, { memory: { role: 'upgrader' } });
-    }
-
-    // @ts-ignore
-    const builders = _.filter(Game.creeps, (c) => c.memory.role == 'builder');
-    if (builders.length < 2) {
+    } else if (builders.length < 1) {
         const name = 'Builder' + Game.time;
         Game.spawns['Spawn'].spawnCreep([WORK, CARRY, MOVE], name, { memory: { role: 'builder' } });
     }
 
     // Execute roles
+    const roles = {
+        harvester: roleHarvester,
+        upgrader: roleUpgrader,
+        builder: roleBuilder,
+        carrier: roleCarrier
+    };
+
     for(const name in Game.creeps) {
         const creep = Game.creeps[name];
-        if(creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
-        }
-        if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        }
-        if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        }
+        roles[creep.memory.role].run(creep);
     }
 
 }
