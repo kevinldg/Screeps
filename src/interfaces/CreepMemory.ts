@@ -3,5 +3,6 @@ interface CreepMemory {
     building?: boolean;
     collecting?: boolean;
     upgrading?: boolean;
+    repairing?: boolean;
 
 }

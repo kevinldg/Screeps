@@ -2,8 +2,8 @@ export const roleHarvester = {
     run: function (creep: Creep) {
 
         const source = creep.room.find(FIND_SOURCES)[0];
-        const containers = source.pos.findInRange(FIND_STRUCTURES, 5, {
-            filter: (s) => s.structureType === STRUCTURE_CONTAINER
+        const containers = source.pos.findInRange(FIND_STRUCTURES, 10, {
+            filter: (s) => s.structureType === STRUCTURE_CONTAINER && s.store.getFreeCapacity() > 0
         }) as StructureContainer[];
 
         const container = containers[0];
