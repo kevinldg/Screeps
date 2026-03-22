@@ -33,7 +33,7 @@ export function loop() {
     } else if (upgraders.length < 2) {
         const name = 'Upgrader' + Game.time;
         Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE], name, { memory: { role: 'upgrader' } });
-    } else if (builders.length < 2) {
+    } else if (builders.length < 0) {
         const name = 'Builder' + Game.time;
         Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, CARRY, MOVE], name, { memory: { role: 'builder' } });
     }
