@@ -25,7 +25,7 @@ export function loop() {
     const CREEP_CONFIG = [
         { role: 'harvester', limit: 2, body: [WORK, WORK, CARRY, MOVE] },
         { role: 'carrier', limit: 2, body: [CARRY, CARRY, MOVE, MOVE] },
-        { role: 'upgrader', limit: 1, body: [WORK, CARRY, CARRY, MOVE] },
+        { role: 'upgrader', limit: 2, body: [WORK, CARRY, CARRY, MOVE] },
         { role: 'repairer', limit: 0, body: [WORK, WORK, CARRY, MOVE] },
         { role: 'builder', limit: 0, body: [WORK, WORK, CARRY, MOVE] },
         { role: 'roadworker', limit: 1, body: [WORK, WORK, CARRY, MOVE] },
