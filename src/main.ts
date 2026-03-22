@@ -28,17 +28,17 @@ export function loop() {
 
     if (harvesters.length < 2) {
         const name = 'Harvester' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], name, { memory: { role: 'harvester' } });
+        Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'harvester' } });
     } else if (carriers.length < 2) {
         const name = 'Carrier' + Game.time;
-        Game.spawns[spawnName].spawnCreep([CARRY, CARRY, MOVE], name, { memory: { role: 'carrier' } });
+        Game.spawns[spawnName].spawnCreep([CARRY, CARRY, MOVE, MOVE], name, { memory: { role: 'carrier' } });
     } else if (upgraders.length < 1) {
         const name = 'Upgrader' + Game.time;
-        Game.spawns[spawnName].spawnCreep([WORK, CARRY, MOVE], name, { memory: { role: 'upgrader' } });
+        Game.spawns[spawnName].spawnCreep([WORK, CARRY, CARRY, MOVE], name, { memory: { role: 'upgrader' } });
     } else if (repairers.length < 1) {
         const name = 'Repairer' + Game.time;
         Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'repairer' } });
-    } else if (builders.length < 1) {
+    } else if (builders.length < 2) {
         const name = 'Builder' + Game.time;
         Game.spawns[spawnName].spawnCreep([WORK, WORK, CARRY, MOVE], name, { memory: { role: 'builder' } });
     }
